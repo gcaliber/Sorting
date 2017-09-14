@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Sorting {
 	
 	/**
@@ -20,36 +22,44 @@ public class Sorting {
 		mergeSort(arr, left, mid);
 		mergeSort(arr, mid + 1, right);
 		
-		merge(arr, left, mid, right);
-	}
-	
-	private static void merge(CompareInt[] arr, int left, int mid, int right) {
-		CompareInt[] tempArr = new CompareInt[arr.length];
+		CompareInt[] a = Arrays.copyOfRange(arr, left, mid + 1);
+		CompareInt[] b = Arrays.copyOfRange(arr, mid + 1, right + 1);
 		
-		for (int i = left; i <= right; i++) {
-			tempArr[i] = arr[i];
+		CompareInt[] temp = merge(a, b);
+		
+		for (int i = left; i < right + 1; i++) {
+			arr[i] = temp[i - left];
 		}
 		
-		int i = left;
-		int j = mid + 1;
-		int k = left;
+	}
+	
+	private static CompareInt[] merge(CompareInt[] a, CompareInt[] b) {
+		CompareInt[] c = new CompareInt[a.length + b.length];
 		
-        while (i <= mid && j <= right) {
-            if (tempArr[i].compareTo(tempArr[j]) <= 0) {
-                arr[k] = tempArr[i];
+		int i = 0;
+		int j = 0;
+		int k = 0;
+		
+        while (i < a.length && j < b.length) {
+            if (a[i].compareTo(b[j]) < 0) {
+                c[k] = a[i];
                 i++;
             } else {
-                arr[k] = tempArr[j];
+                c[k] = b[j];
                 j++;
             }
             k++;
         }
         
-        while (i <= mid) {
-            arr[k] = tempArr[i];
-            k++;
-            i++;
+        while (i < a.length) {
+            c[k++] = a[i++];
         }
+
+        while (j < b.length) {
+            c[k++] = b[j++];
+        } 
+        
+        return c;
 	}
 	
 	/**

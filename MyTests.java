@@ -15,8 +15,8 @@ import org.junit.Test;
  * functions correctly (they make an appropriate number of comparisons)
  */
 public class MyTests {
-	private int BIGGER = 10000;
-	private int BIG = 1000;
+	private int BIGGER = 100000;
+	private int BIG = 10000;
 	/**
 	 * Helper function for converting an array of ints to an array of our ComapreInts
 	 */
